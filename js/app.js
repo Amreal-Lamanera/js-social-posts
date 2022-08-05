@@ -64,40 +64,6 @@ const posts = [
     POST DI ESEMPIO
 ***************************************************************************************************************/
 
-{/* 
-    <div class="post">
-        <div class="post__header">
-            <div class="post-meta">
-                <div class="post-meta__icon">
-                    <img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt="Phil Mangione">
-                </div>
-                <div class="post-meta__data">
-                    <div class="post-meta__author">Phil Mangione</div>
-                    <div class="post-meta__time">4 mesi fa</div>
-                </div>
-            </div>
-        </div>
-        <div class="post__text">Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima
-            iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.</div>
-        <div class="post__image">
-            <img src="https://unsplash.it/600/300?image=171" alt="">
-        </div>
-        <div class="post__footer">
-            <div class="likes js-likes">
-                <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
-                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                        <span class="like-button__label">Mi Piace</span>
-                    </a>
-                </div>
-                <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone
-                </div>
-            </div>
-        </div>
-    </div> 
-*/}
-
 // PRENDO DAL DOM L'ELEMNTO A CUI AGGANCERO' I MIEI CONTENUTI
 const container = document.getElementById('container');
 console.log(container);
@@ -119,16 +85,7 @@ function getPosts() {
         const postMI = document.createElement('div');
         postMI.className = 'post-meta__icon';
         // creo img class profile pc con src e alt presi dall'array posts
-        let img = document.createElement('img');
-        img.className = 'profile-pic';
-        if (element.author.image !== null) {
-            img.src = element.author.image;
-            img.alt = element.author.name;
-        } else {
-            img = document.createElement('div');
-            img.classList.add('border', 'bg-primary', 'rounded-circle', 'text-white', 'fw-bold', 'fakeImg');
-            img.innerHTML += getFirstLetter(element);
-        }
+        let img = getImg(element);
         // lo appendo a postMI
         postMI.append(img);
         // creo div post meta data
@@ -190,6 +147,20 @@ function calcWhen(postDate) {
     if (!diffYear && diffMonth <= 0) message += `${diffDays} giorni `;
 
     return message += 'fa';
+}
+
+function getImg(element) {
+    let img = document.createElement('img');
+    img.className = 'profile-pic';
+    if (element.author.image !== null) {
+        img.src = element.author.image;
+        img.alt = element.author.name;
+    } else {
+        img = document.createElement('div');
+        img.classList.add('border', 'bg-primary', 'rounded-circle', 'text-white', 'fw-bold', 'fakeImg');
+        img.innerHTML += getFirstLetter(element);
+    }
+    return img;
 }
 
 function getFirstLetter(element) {

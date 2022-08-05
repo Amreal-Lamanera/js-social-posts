@@ -75,37 +75,54 @@ function getPosts() {
         // credo div class post
         const post = document.createElement('div');
         post.className = 'post';
-        //creo div class post header
-        const postH = document.createElement('div');
-        postH.className = 'post__header';
-        //creo div class post meta
-        const postM = document.createElement('div');
-        postM.className = 'post-meta';
-        //creo div class post meta icon
-        const postMI = document.createElement('div');
-        postMI.className = 'post-meta__icon';
-        // creo img class profile pc con src e alt presi dall'array posts
-        let img = getImg(element);
-        // lo appendo a postMI
-        postMI.append(img);
-        // creo div post meta data
-        const postMD = document.createElement('div');
-        postMD.className = 'post-meta__data';
-        // creo div contenente l'autore
-        const postMA = document.createElement('div');
-        postMA.className = 'post-meta__author';
-        postMA.innerHTML = element.author.name;
-        // creo div contenente quando è stato fatto il post
-        const postMT = document.createElement('div');
-        postMT.className = 'post-meta__time';
-        postMT.innerHTML = calcWhen(element.created);
-        postMD.append(postMA);
-        postMD.append(postMT);
-        // appendo la struttura
-        postM.append(postMI);
-        postM.append(postMD);
-        postH.append(postM);
-        post.append(postH);
+
+        {// HEADER
+            //creo div class post header
+            const postH = document.createElement('div');
+            postH.className = 'post__header';
+            //creo div class post meta
+            const postM = document.createElement('div');
+            postM.className = 'post-meta';
+            //creo div class post meta icon
+            const postMI = document.createElement('div');
+            postMI.className = 'post-meta__icon';
+            // creo img class profile pc con src e alt presi dall'array posts
+            let img = getImg(element);
+            // lo appendo a postMI
+            postMI.append(img);
+            // creo div post meta data
+            const postMD = document.createElement('div');
+            postMD.className = 'post-meta__data';
+            // creo div contenente l'autore
+            const postMA = document.createElement('div');
+            postMA.className = 'post-meta__author';
+            postMA.innerHTML = element.author.name;
+            // creo div contenente quando è stato fatto il post
+            const postMT = document.createElement('div');
+            postMT.className = 'post-meta__time';
+            postMT.innerHTML = calcWhen(element.created);
+            postMD.append(postMA);
+            postMD.append(postMT);
+            // appendo la struttura
+            postM.append(postMI);
+            postM.append(postMD);
+            postH.append(postM);
+            post.append(postH);
+        }
+
+        {// BODY
+            const postT = document.createElement('div');
+            postT.className = 'post__text';
+            postT.innerHTML = element.content;
+            post.append(postT);
+
+            const postI = document.createElement('div');
+            postI.className = 'post__image';
+            const postImg = document.createElement('img');
+            postImg.src = element.media;
+            postI.append(postImg);
+            post.append(postI);
+        }
 
         container.append(post);
     });

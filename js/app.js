@@ -69,7 +69,7 @@ const container = document.getElementById('container');
 // console.log(container);
 // STAMPO NEL DOM TUTTI I POST CONTENUTI NELL'ARRAY POSTS
 getPosts();
-console.log(posts[0].likes);
+// console.log(posts[0].likes);
 
 function getPosts() {
     posts.forEach(element => {
@@ -145,7 +145,7 @@ function getPosts() {
 
             const a = document.createElement('a');
             a.classList.add('like-button', 'js-like-button')
-            a.href = '#';
+            a.href = '#nogo';
             a.dataset.postid = element.id;
             // console.log(a);
 
@@ -155,7 +155,7 @@ function getPosts() {
 
             const likeBtn = document.createElement('span');
             likeBtn.className = 'like-button__label';
-            likeBtn.innerHTML = 'Mi Piace';
+            likeBtn.innerHTML = ' Mi Piace';
             let liked = false;
 
             const counter = document.createElement('b');
@@ -174,6 +174,16 @@ function getPosts() {
                     liked = false;
                     likesCount(false, element.id);
                 }
+            })
+
+            cta.addEventListener('mouseover', function () {
+                if (liked) {
+                    likeBtn.innerHTML = ' non mi piace più'
+                }
+            })
+
+            cta.addEventListener('mouseleave', function () {
+                likeBtn.innerHTML = ' Mi Piace'
             })
 
             a.append(i);

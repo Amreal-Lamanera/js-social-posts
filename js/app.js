@@ -276,14 +276,15 @@ function likesCount(bool, id) {
     if (bool) {
         counter.innerHTML++;
         likedPosts.push(id);
-        // console.log(likedPosts);
     }
     else {
         counter.innerHTML--;
-        likedPosts = likedPosts.filter(e => {
-            if (e === id) return false;
-            return true;
-        })
-        // console.log(likedPosts);
+        // likedPosts = likedPosts.filter(e => {
+        //     if (e === id) return false;
+        //     return true;
+        // })
+        const index = likedPosts.indexOf(id);
+        likedPosts.splice(index, 1);
     }
+    // console.log(likedPosts);
 }

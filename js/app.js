@@ -67,6 +67,9 @@ const posts = [
 // PRENDO DAL DOM L'ELEMNTO A CUI AGGANCERO' I MIEI CONTENUTI
 const container = document.getElementById('container');
 // console.log(container);
+
+let likedPosts = [];
+
 // STAMPO NEL DOM TUTTI I POST CONTENUTI NELL'ARRAY POSTS
 getPosts();
 // console.log(posts[0].likes);
@@ -156,7 +159,7 @@ function getPosts() {
             const likeBtn = document.createElement('span');
             likeBtn.className = 'like-button__label';
             likeBtn.innerHTML = ' Mi Piace';
-            let liked = false;
+            // let liked = false;
 
             const counter = document.createElement('b');
             counter.className = 'js-likes-counter';
@@ -164,20 +167,24 @@ function getPosts() {
             counter.innerHTML = element.likes;
 
             cta.addEventListener('click', function () {
-                if (!liked) {
+                if (!likedPosts.includes(element.id)) {
                     a.classList.add('text-primary');
-                    liked = true;
+                    // liked = true;
+                    element.likes++;
+                    // console.log(element.likes);
                     likesCount(true, element.id);
                 }
                 else {
                     a.classList.remove('text-primary');
-                    liked = false;
+                    // liked = false;
+                    element.likes--;
+                    // console.log(element.likes);
                     likesCount(false, element.id);
                 }
             })
 
             cta.addEventListener('mouseover', function () {
-                if (liked) {
+                if (likedPosts.includes(element.id)) {
                     likeBtn.innerHTML = ' non mi piace più'
                 }
             })
@@ -266,6 +273,17 @@ function getFirstLetter(element) {
 
 function likesCount(bool, id) {
     const counter = document.getElementById(`like-counter-${id}`)
-    if (bool) counter.innerHTML++;
-    else counter.innerHTML--;
+    if (bool) {
+        counter.innerHTML++;
+        likedPosts.push(id);
+        // console.log(likedPosts);
+    }
+    else {
+        counter.innerHTML--;
+        likedPosts = likedPosts.filter(e => {
+            if (e === id) return false;
+            return true;
+        })
+        // console.log(likedPosts);
+    }
 }
